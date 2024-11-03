@@ -2,12 +2,15 @@
 using namespace std;
 
 #include <iomanip>
-using std::setw;
 
 //Funciones
 void menu_principal(int&);
 void submenu_inventario(char&);
 void submenu_pedido(char&);
+void funci_submen_invent(char&);
+char validar_letra(char&);
+char mayus_minus(char&);
+void ingr_pieza_inventario();
 
 int main() {
 
@@ -24,7 +27,7 @@ int main() {
         //Valida la opcion elegida por el usuario
         switch(opc_menu) {
         case 1: //Inventario
-            submenu_inventario(opc_submenu);
+            funci_submen_invent(opc_submenu);
             break;
         case 2://Pedido
             submenu_pedido(opc_submenu);
@@ -99,9 +102,87 @@ void submenu_pedido(char& opc_submenu) {
     cout << "e. Atrás" << endl;
 
     cout << "\nR/: ";
+    //Tomamos la opcion tomada por el usuario y validamos que sea letra
     cin >> opc_submenu;
     cin.ignore();//Ignora campos en blanco
     cin.clear();//limpia el búfer
     system("CLS");//Limpia pantalla
 
 }//Fin menu_inventario
+
+//Funcionalidad del submenu inventario
+void funci_submen_invent(char& opc_submenu) {
+    do {
+
+        //Mostramos el submenu de inventarios
+        submenu_inventario(opc_submenu);
+        //validamos minuscula y que sea una letra
+        opc_submenu = validar_letra(opc_submenu);
+        //Valida la opcion elegida por el usuario para hacer lo siguiente
+        switch(opc_submenu) {
+        case 'a'://Ingresar pieza al inventario.
+            ingr_pieza_inventario();
+            break;
+
+        case 'b'://Consultar pieza del inventario.
+            break;
+
+        case 'c'://Modificar pieza del inventario.
+            break;
+
+        case 'd'://Eliminar pieza del inventario.
+            break;
+
+        case 'e'://Regresar al menu principal.
+            break;
+
+        default:
+            cout << "Opción inválida, vuelva a intentarlo" << endl;
+            system("PAUSE");//Para programa hasta presionar alguna tecla
+            system("CLS");//Limpia pantalla
+            break;
+        }//Fin del switch
+    } while(opc_submenu != 'e');//Repitase mientras opcion submenu sea diferente a 'e'
+}//Fin de la funcion funci_submen_invent
+
+//Ingresar pieza al inventario.
+void ingr_pieza_inventario(){
+    cout << "Ingrese el código de la pieza. (Formato: P + 8 Dígitos)" << endl;
+
+
+
+
+}//Fin de la funcion ingr_pieza_inventario
+
+//Valida que el caracter opcion ingresada por el usuario sea una letra
+char validar_letra(char& letra) {
+    char letra_char;
+
+    //Si es un digito
+    if(isdigit(letra)) {
+        //inicialice letra en vacio nuevamente para que vaya al default
+        letra_char = ' ';
+    } else {
+        letra_char = mayus_minus(letra);
+    }//Fin del if/else
+
+    //retornamos letra_char
+    return letra_char;
+}//Fin del metodo validar_letra
+
+//Convierte cualquier caracter en minuscula
+char mayus_minus(char& letra) {
+    char letra_char;
+
+    //convierte el caracter en minuscula
+    letra_char = tolower(letra);
+
+    //retornamos letra_char
+    return letra_char;
+}//Fin del metodo mayus_minus
+
+bool validar_codigo(string& codigo){
+
+}//Fin de validar_codigo
+
+
